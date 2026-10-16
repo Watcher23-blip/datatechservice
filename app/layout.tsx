@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
 export const metadata: Metadata = {
-  title: "DATATECH SERVICES",
+  title: "DATATECH SERVICE",
   description: "Welcome to our website.",
 };
 
