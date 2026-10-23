@@ -84,7 +84,7 @@ export default function Contact() {
                 className="btn-3d btn-orange mt-6 w-full justify-between !tracking-[0.04em] !normal-case"
               >
                 <span className="break-all text-sm sm:text-base">
-                  support@datatechservices.com
+                  Oderwork43@gmail.com
                 </span>
                 <span
                   className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-ink text-orange"
