@@ -1,14 +1,24 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f3f3f1;
+  --foreground: #16171a;
 }
 
 @theme inline {
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-barlow-condensed), ui-sans-serif, system-ui, sans-serif;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: Arial, Helvetica, sans-serif;
+
+  --color-ink: #16171a;
+  --color-graphite: #26282b;
+  --color-paper: #f3f3f1;
+  --color-line: #e2e2df;
+  --color-mute: #6b6d70;
+  --color-orange: #f4a04a;
+  --color-orange-deep: #ea8a1f;
 }
 
 * {
@@ -23,7 +33,7 @@ body {
   margin: 0;
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -45,6 +55,102 @@ a {
 }
 
 ::selection {
-  background: #dbeafe;
-  color: #171717;
+  background: #f4a04a;
+  color: #16171a;
+}
+
+:focus-visible {
+  outline: 2px solid #f4a04a;
+  outline-offset: 3px;
+  border-radius: 12px;
+}
+
+/* fine engineering grid */
+.grid-lines {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+.grid-lines-light {
+  background-image:
+    linear-gradient(rgba(22, 23, 26, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(22, 23, 26, 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+/* ---------- 3D buttons ---------- */
+/* inside @layer components so Tailwind utilities (md:hidden, !px-4 ...) can override them */
+@layer components {
+.btn-3d {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  border-radius: 9999px;
+  padding: 0.6rem 0.6rem 0.6rem 1.6rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  transition:
+    transform 0.22s cubic-bezier(0.3, 1.5, 0.5, 1),
+    box-shadow 0.22s ease;
+  will-change: transform;
+}
+
+.btn-orange {
+  color: #16171a;
+  background: linear-gradient(180deg, #ffb869, #f4a04a 60%, #e58f31);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    0 5px 0 #a85c16,
+    0 20px 30px -10px rgba(244, 160, 74, 0.6);
+}
+.btn-orange:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    0 7px 0 #a85c16,
+    0 28px 36px -10px rgba(244, 160, 74, 0.65);
+}
+.btn-orange:active {
+  transform: translateY(4px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    0 1px 0 #a85c16,
+    0 8px 12px -6px rgba(244, 160, 74, 0.5);
+}
+
+.btn-dark {
+  color: #fff;
+  background: linear-gradient(180deg, #3b3e42, #1b1c1f);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 5px 0 #060607,
+    0 20px 30px -10px rgba(0, 0, 0, 0.55);
+}
+.btn-dark:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 7px 0 #060607,
+    0 28px 36px -10px rgba(0, 0, 0, 0.6);
+}
+.btn-dark:active {
+  transform: translateY(4px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 1px 0 #060607,
+    0 8px 12px -6px rgba(0, 0, 0, 0.5);
+}
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .btn-3d {
+    transition: none;
+  }
 }

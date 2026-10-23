@@ -1,73 +1,74 @@
+
+'use client';
+
 import {
   ShieldCheck,
   Clock3,
   Layers3,
   BriefcaseBusiness,
-} from "lucide-react";
+} from 'lucide-react';
+
+import { Eyebrow, Icon3D, Reveal, Spotlight, Tilt } from './Ui';
+import { cardLight } from './theme';
 
 const highlights = [
-  {
-    title: "18+ Years Experience",
-    icon: Clock3,
-  },
-  {
-    title: "Data Security",
-    icon: ShieldCheck,
-  },
-  {
-    title: "On-Time Delivery",
-    icon: BriefcaseBusiness,
-  },
-  {
-    title: "Flexible Scale",
-    icon: Layers3,
-  },
+  { title: '18+ Years Experience', icon: Clock3 },
+  { title: 'Data Security', icon: ShieldCheck },
+  { title: 'On-Time Delivery', icon: BriefcaseBusiness },
+  { title: 'Flexible Scale', icon: Layers3 },
 ];
 
 export default function About() {
   return (
     <section
       id="about"
-      className="bg-gray-50 px-5 py-20 md:px-8 md:py-28"
+      className="scroll-mt-20 bg-white px-5 py-20 sm:px-8 md:py-28"
     >
       <div className="mx-auto max-w-7xl">
-        <div className="mx-auto max-w-3xl text-center">
-          <span className="text-sm font-normal uppercase tracking-[0.18em] text-blue-600">
-            About Us
-          </span>
+        {/* Centered About Heading and Description */}
+        <Reveal>
+          <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
+            <Eyebrow>About Us</Eyebrow>
 
-          <h2 className="mt-4 text-3xl font-normal tracking-tight text-gray-900 sm:text-4xl md:text-5xl">
-           DATATECH SERVICES
-          </h2>
+            <h2 className="mt-6 font-display text-[clamp(2.2rem,5vw,4.5rem)] font-bold uppercase leading-[0.95] tracking-[-0.025em] text-ink">
+              DATATECH
+              <span className="text-[#F4A04A]"> SERVICES</span>
+            </h2>
 
-          <p className="mt-6 text-base leading-8 text-gray-600 md:text-lg">
-            Established in 2006, DATATECHSERVICES delivers reliable typing,
-            data entry, and data segregation solutions for businesses
-            across India.
-          </p>
-        </div>
+            <div className="mt-7 h-px w-24 bg-gradient-to-r from-transparent via-orange to-transparent" />
 
-        <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {highlights.map((item) => {
-            const Icon = item.icon;
+            <p className="mt-7 max-w-2xl text-base leading-7 text-mute sm:text-lg sm:leading-8">
+              Established in 2006, DATATECH SERVICES delivers reliable
+              typing, data entry, and data segregation solutions for
+              businesses across India.
+            </p>
+          </div>
+        </Reveal>
 
-            return (
-              <div
-                key={item.title}
-                className="group relative rounded-2xl border border-gray-200/80 bg-white p-8 text-center shadow-[0_5px_0_0_#dbeafe,0_10px_20px_rgba(15,23,42,0.06)] transition-all duration-300 ease-out hover:-translate-y-2 hover:border-blue-200 hover:shadow-[0_8px_0_0_#bfdbfe,0_22px_35px_rgba(37,99,235,0.14)] motion-reduce:transform-none motion-reduce:transition-none"
-              >
-                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-50 to-blue-100/70 text-blue-600 shadow-[inset_0_2px_4px_rgba(255,255,255,0.9),0_5px_10px_rgba(37,99,235,0.10)] transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 group-hover:shadow-[0_8px_18px_rgba(37,99,235,0.18)] motion-reduce:transform-none">
-                  <Icon size={30} strokeWidth={1.6} />
-                </div>
+        {/* Four Highlight Cards */}
+        <div className="mt-14 grid grid-cols-1 gap-4 sm:mt-16 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
+          {highlights.map((item, i) => (
+            <Reveal
+              key={item.title}
+              delay={0.08 * i}
+              className="h-full"
+            >
+              <Tilt className="h-full">
+                <Spotlight
+                  className="flex h-full min-h-[190px] flex-col items-center justify-center rounded-[24px] bg-gradient-to-b from-white to-[#F3F3F1] p-5 text-center sm:min-h-[220px] sm:rounded-[28px] sm:p-7"
+                  style={{ boxShadow: cardLight }}
+                >
+                  <Icon3D icon={item.icon} tone="dark" size={54} />
 
-                <h3 className="mt-6 text-lg font-normal leading-7 text-gray-800 transition-colors duration-300 group-hover:text-blue-700">
-                  {item.title}
-                </h3>
+                  <h3 className="mt-7 text-base font-bold leading-snug tracking-tight text-ink sm:text-lg">
+                    {item.title}
+                  </h3>
 
-                <div className="mx-auto mt-4 h-0.5 w-8 rounded-full bg-blue-200 transition-all duration-300 group-hover:w-16 group-hover:bg-blue-500" />
-              </div>
-            );
-          })}
+             
+                </Spotlight>
+              </Tilt>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>

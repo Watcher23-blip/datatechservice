@@ -1,33 +1,48 @@
+
+'use client';
+
+import { motion } from 'framer-motion';
 import {
   FileText,
   Database,
   Users,
   Workflow,
-} from "lucide-react";
+  ArrowUpRight,
+} from 'lucide-react';
+
+import {
+  Eyebrow,
+  Icon3D,
+  Reveal,
+  Spotlight,
+  Tilt,
+} from './Ui';
+
+import { cardDark } from './theme';
 
 const services = [
   {
-    title: "Typing Centre",
+    title: 'Typing Centre',
     description:
-      "High-volume document typing, digitization, and data entry with speed and precision.",
+      'High-volume document typing, digitization, and data entry with speed and precision.',
     icon: FileText,
   },
   {
-    title: "Data Segregation",
+    title: 'Data Segregation',
     description:
-      "Accurate classification and organization of business-critical data.",
+      'Accurate classification and organization of business-critical data.',
     icon: Database,
   },
   {
-    title: "Freelancer Network",
+    title: 'Freelancer Network',
     description:
-      "A trained workforce across India enabling flexible and scalable execution.",
+      'A trained workforce across India enabling flexible and scalable execution.',
     icon: Users,
   },
   {
-    title: "Data Processing",
+    title: 'Data Processing',
     description:
-      "Clean, validated, and structured data ready for business use.",
+      'Clean, validated, and structured data ready for business use.',
     icon: Workflow,
   },
 ];
@@ -36,50 +51,91 @@ export default function Services() {
   return (
     <section
       id="services"
-      className="bg-blue-700 px-5 py-20 md:px-8 md:py-24"
+      className="scroll-mt-20 w-full bg-gradient-to-b from-[#2E3034] to-[#141517] px-5 py-20 sm:px-8 md:py-28"
+      style={{ boxShadow: cardDark }}
     >
-      <div className="mx-auto max-w-7xl">
-        <div className="mx-auto max-w-3xl text-center">
-          <span className="text-sm font-normal uppercase tracking-[0.16em] text-blue-100">
-            What We Do
-          </span>
+      {/* Background Effects */}
+      <div
+        aria-hidden="true"
+        className="grid-lines pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_at_top,black,transparent_70%)]"
+      />
 
-          <h2 className="mt-4 text-3xl font-normal tracking-tight text-white sm:text-4xl md:text-5xl">
-            Our Services
-          </h2>
+      <motion.div
+        aria-hidden="true"
+        animate={{
+          opacity: [0.2, 0.4, 0.2],
+          scale: [1, 1.15, 1],
+        }}
+        transition={{
+          duration: 9,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        }}
+        className="pointer-events-none absolute right-[-6rem] top-0 h-[26rem] w-[26rem] rounded-full bg-orange blur-[150px]"
+      />
 
-          <p className="mt-5 text-base font-normal leading-7 text-blue-50 md:text-lg">
-            IT-enabled solutions tailored for modern businesses.
-          </p>
-        </div>
+      <div className="relative mx-auto w-full max-w-7xl">
+        {/* Centered Heading */}
+        <Reveal>
+          <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
+            <Eyebrow dark>What We Do</Eyebrow>
 
-        <div className="mx-auto mt-12 grid max-w-6xl grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {services.map((service) => {
-            const Icon = service.icon;
+            <h2 className="mt-7 font-display text-[clamp(2.2rem,5vw,4rem)] font-bold uppercase leading-[0.95] tracking-[-0.025em] text-white">
+              Our <span className="text-[#F4A04A]">Services</span>
+            </h2>
 
-            return (
-              <div
-                key={service.title}
-                className="flex min-h-[280px] flex-col items-center rounded-xl bg-white px-5 py-10 text-center transition-transform duration-200 hover:-translate-y-1"
-              >
-                <Icon
-                  size={34}
-                  strokeWidth={1.7}
-                  className="text-blue-600"
-                  fill="currentColor"
-                  fillOpacity={0.12}
-                />
+            <div className="mt-7 h-px w-24 bg-gradient-to-r from-transparent via-orange to-transparent" />
 
-                <h3 className="mt-5 text-lg font-normal text-black">
-                  {service.title}
-                </h3>
+            <p className="mt-6 max-w-lg text-base leading-7 text-white/60 sm:text-lg sm:leading-8">
+              IT-enabled solutions tailored for modern businesses.
+              Reliable execution, accurate results, and flexible
+              support to help your business move forward.
+            </p>
+          </div>
+        </Reveal>
 
-                <p className="mt-3 text-sm font-normal leading-7 text-black/70">
-                  {service.description}
-                </p>
-              </div>
-            );
-          })}
+        {/* Service Cards */}
+        <div className="mt-14 grid grid-cols-1 gap-5 sm:mt-16 sm:grid-cols-2 lg:grid-cols-4">
+          {services.map((s, i) => (
+            <Reveal
+              key={s.title}
+              delay={0.09 * i}
+              className="h-full"
+            >
+              <Tilt className="h-full">
+                <Spotlight
+                  className="group flex h-full min-h-[300px] flex-col items-center rounded-[28px] border border-white/10 p-6 text-center transition-colors duration-300 hover:border-[#F4A04A]/40 sm:min-h-[330px] sm:p-7"
+                  style={{
+                    background:
+                      'linear-gradient(165deg, rgba(255,255,255,.09), rgba(255,255,255,.02))',
+                    boxShadow:
+                      'inset 0 1px 0 rgba(255,255,255,.14), 0 5px 0 rgba(0,0,0,.35), 0 30px 50px -24px rgba(0,0,0,.8)',
+                  }}
+                >
+                  {/* Icon and Arrow */}
+                  <div className="relative flex w-full items-center justify-center">
+                    <Icon3D icon={s.icon} tone="orange" size={64} />
+
+                    <span className="absolute right-0 top-1 flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/70 opacity-0 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100">
+                      <ArrowUpRight size={16} />
+                    </span>
+                  </div>
+
+                  {/* Text */}
+                  <h3 className="mt-8 text-xl font-bold leading-snug tracking-tight text-white">
+                    {s.title}
+                  </h3>
+
+                  <p className="mt-3 max-w-xs text-[15px] leading-7 text-white/60">
+                    {s.description}
+                  </p>
+
+                  {/* Accent */}
+                 
+                </Spotlight>
+              </Tilt>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>

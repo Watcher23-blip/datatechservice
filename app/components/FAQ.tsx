@@ -1,29 +1,27 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import Link from "next/link";
-import {
-  ChevronDown,
-  MessageCircle,
-  ArrowUpRight,
-  ArrowRight,
-} from "lucide-react";
+import { useState } from 'react';
+import Link from 'next/link';
+import { AnimatePresence, motion } from 'framer-motion';
+import { MessageCircle, ArrowUpRight, Plus } from 'lucide-react';
+import { Eyebrow, Icon3D, Reveal } from './Ui';
+import { cardLight } from './theme';
 
 const faqs = [
   {
-    question: "What services does DATATECHSERVICES provide?",
+    question: 'What services does DATATECHSERVICES provide?',
     answer:
-      "We provide typing, data entry, data segregation, data processing, and freelancer-based execution services.",
+      'We provide typing, data entry, data segregation, data processing, and freelancer-based execution services.',
   },
   {
-    question: "Can you handle large projects?",
+    question: 'Can you handle large projects?',
     answer:
-      "Yes. Our in-house team and freelancer network allow us to scale resources according to project requirements.",
+      'Yes. Our in-house team and freelancer network allow us to scale resources according to project requirements.',
   },
   {
-    question: "Is my data secure?",
+    question: 'Is my data secure?',
     answer:
-      "We prioritize confidentiality and follow data-handling and quality-control protocols throughout our workflow.",
+      'We prioritize confidentiality and follow data-handling and quality-control protocols throughout our workflow.',
   },
 ];
 
@@ -31,119 +29,99 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section
-      id="faq"
-      className="relative isolate overflow-hidden bg-gradient-to-br from-blue-800 via-blue-700 to-indigo-900 px-5 py-20 md:px-8 md:py-28"
-    >
-      <div className="pointer-events-none absolute -left-32 top-10 h-80 w-80 rounded-full bg-cyan-300/10 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-32 right-0 h-96 w-96 rounded-full bg-indigo-400/20 blur-3xl" />
+    <section id="faq" className="scroll-mt-20 bg-white px-5 py-24 md:px-8 md:py-32">
+      <div className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
+        <Reveal className="self-start lg:sticky lg:top-32">
+          <Icon3D icon={MessageCircle} tone="dark" size={68} />
 
-      <div className="pointer-events-none absolute right-[8%] top-16 hidden rotate-12 text-white/[0.08] lg:block">
-        <ArrowUpRight size={100} strokeWidth={0.7} />
-      </div>
-
-      <div className="relative mx-auto max-w-7xl">
-        <div className="text-center">
-          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl border border-white/20 bg-white/10 text-white shadow-lg shadow-blue-950/10 backdrop-blur-sm">
-            <MessageCircle size={25} strokeWidth={1.5} />
+          <div className="mt-9">
+            <Eyebrow>Here to Help</Eyebrow>
           </div>
 
-          <p className="mt-5 text-xs font-medium uppercase tracking-[0.22em] text-blue-200">
-            Here to Help
-          </p>
-
-          <h2 className="mt-3 text-3xl font-normal tracking-tight text-white sm:text-4xl md:text-5xl">
+          <h2 className="mt-7 font-display text-[clamp(1.7rem,3.6vw,3.2rem)] font-bold uppercase leading-[1.1] tracking-[-0.01em] text-ink">
             Frequently Asked Questions
           </h2>
 
-          <p className="mx-auto mt-4 max-w-xl text-sm font-normal leading-7 text-blue-100/90 sm:text-base">
+          <p className="mt-8 max-w-md text-lg leading-8 text-mute">
             Clear answers to help you understand our services and process.
           </p>
 
-          <div className="mx-auto mt-6 h-px w-16 bg-gradient-to-r from-transparent via-cyan-200 to-transparent" />
-        </div>
+          <Link href="#contact" className="btn-3d btn-orange mt-10">
+            Still have questions? Contact us
+            <span
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-ink text-orange"
+              style={{ boxShadow: 'inset 0 1px 0 rgba(255,255,255,.2)' }}
+            >
+              <ArrowUpRight size={16} strokeWidth={2.4} />
+            </span>
+          </Link>
+        </Reveal>
 
-        <div className="mx-auto mt-12 max-w-7xl space-y-4">
+        <div className="space-y-5">
           {faqs.map((faq, index) => {
             const isOpen = openIndex === index;
 
             return (
-              <div
-                key={faq.question}
-                className={`group overflow-hidden rounded-2xl border bg-white transition-all duration-300 ${
-                  isOpen
-                    ? "border-blue-200 shadow-[0_12px_35px_rgba(15,23,42,0.16)]"
-                    : "border-white/60 shadow-[0_4px_18px_rgba(15,23,42,0.08)] hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(15,23,42,0.14)]"
-                }`}
-              >
-                <button
-                  type="button"
-                  onClick={() => setOpenIndex(isOpen ? null : index)}
-                  aria-expanded={isOpen}
-                  className="flex w-full items-center gap-4 px-4 py-5 text-left sm:px-6 sm:py-6"
-                >
-                  <span
-                    className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-sm transition-colors duration-300 ${
-                      isOpen
-                        ? "bg-blue-600 text-white"
-                        : "bg-blue-50 text-blue-700 group-hover:bg-blue-100"
-                    }`}
-                  >
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-
-                  <span className="flex-1 text-sm font-normal leading-6 text-gray-900 sm:text-base">
-                    {faq.question}
-                  </span>
-
-                  <span
-                    className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full transition-all duration-300 ${
-                      isOpen
-                        ? "rotate-180 bg-blue-600 text-white"
-                        : "bg-gray-100 text-gray-600 group-hover:bg-blue-50 group-hover:text-blue-700"
-                    }`}
-                  >
-                    <ChevronDown size={18} strokeWidth={1.7} />
-                  </span>
-                </button>
-
+              <Reveal key={faq.question} delay={0.08 * index} y={26}>
                 <div
-                  className={`grid transition-[grid-template-rows] duration-300 ease-in-out ${
-                    isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                  className={`relative overflow-hidden rounded-[24px] transition-colors duration-300 ${
+                    isOpen ? 'bg-ink text-white' : 'bg-gradient-to-b from-white to-[#F3F3F1] text-ink'
                   }`}
+                  style={{
+                    boxShadow: isOpen
+                      ? 'inset 0 1px 0 rgba(255,255,255,.12), 0 6px 0 #000, 0 34px 50px -24px rgba(0,0,0,.6)'
+                      : cardLight,
+                  }}
                 >
-                  <div className="overflow-hidden">
-                    <div className="mx-5 border-t border-gray-100 sm:mx-6" />
+                  <button
+                    type="button"
+                    onClick={() => setOpenIndex(isOpen ? null : index)}
+                    aria-expanded={isOpen}
+                    className="flex w-full items-center gap-4 px-5 py-5 text-left sm:px-7 sm:py-6"
+                  >
+                    <span
+                      className={`font-display text-sm font-bold transition-colors duration-300 ${
+                        isOpen ? 'text-orange' : 'text-mute'
+                      }`}
+                    >
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
 
-                    <div className="flex gap-3 px-5 py-5 sm:px-7 sm:py-6">
-                      <ArrowRight
-                        size={17}
-                        className="mt-1 shrink-0 text-blue-600"
-                        strokeWidth={1.7}
-                      />
+                    <span className="flex-1 text-base font-bold leading-snug tracking-tight sm:text-lg">
+                      {faq.question}
+                    </span>
 
-                      <p className="text-sm font-normal leading-7 text-gray-600 sm:text-base">
-                        {faq.answer}
-                      </p>
-                    </div>
-                  </div>
+                    <motion.span
+                      animate={{ rotate: isOpen ? 135 : 0 }}
+                      transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                      className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full ${
+                        isOpen ? 'bg-orange text-ink' : 'bg-ink/[0.06] text-ink'
+                      }`}
+                    >
+                      <Plus size={18} strokeWidth={2.3} />
+                    </motion.span>
+                  </button>
+
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        key="answer"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                        className="overflow-hidden"
+                      >
+                        <p className="pb-7 pl-[4.25rem] pr-6 text-base leading-7 text-white/65 sm:pl-[4.75rem] sm:pr-10 sm:text-[17px] sm:leading-8">
+                          {faq.answer}
+                        </p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
-              </div>
+              </Reveal>
             );
           })}
-        </div>
-
-        <div className="mt-10 text-center">
-          <Link
-  href="#contact"
-  className="group mx-auto mt-10 inline-flex items-center gap-3 rounded-full border border-white/25 bg-white/10 px-6 py-3 text-sm font-normal !text-white backdrop-blur-sm transition-all duration-200 hover:border-white/50 hover:bg-white/15"
->
-  <span className="!text-white">Still have questions? Contact us</span>
-  <ArrowUpRight
-    size={17}
-    className="shrink-0 !text-white transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-  />
-</Link>
         </div>
       </div>
     </section>
